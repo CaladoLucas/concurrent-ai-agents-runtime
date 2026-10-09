@@ -1,0 +1,28 @@
+services:
+  runtime-demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: concurrent-agents-demo
+    command: ["node", "dist/demo.js"]
+    environment:
+      - NODE_ENV=production
+
+  runtime-benchmark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: concurrent-agents-benchmark
+    command: ["node", "dist/benchmark.js"]
+    environment:
+      - NODE_ENV=production
+
+  runtime-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: concurrent-agents-tests
+    command: ["npm", "test"]
+    environment:
+      - NODE_ENV=test
